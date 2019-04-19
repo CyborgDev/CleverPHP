@@ -1,12 +1,17 @@
 <?php
     class Database{
 
-        const DISCONNECTED = '0001';
-        const CONNECTED = '0002';
+        // Status code
+        const DISCONNECTED = 'STA_0001';
+        const CONNECTED = 'STA_0002';
 
-        const ERR_ALREADY_DISCONNECTED = DISCONNECTED.'.01';
-        const ERR_QUERY_FAILED = CONNECTED.'.01';
-        const ERR_NOT_ENOUGH_ARGS = ERR_QUERY_FAILED.'.01';
+        // Success code
+        const SUCC_QUERY_DONE = 'SUCC_0001';
+
+        // Error code
+        const ERR_ALREADY_DISCONNECTED = 'ERR_0001';
+        const ERR_QUERY_FAILED = 'ERR_0002';
+        const ERR_NOT_ENOUGH_ARGS = 'ERR_0003';
 
         private $_host;
         private $_db_name;
@@ -101,14 +106,14 @@
 
                 if(count($table) == 1) $table = $table[0];
 
-                $this->_object_log[] = date('Y-m-d H:i:s').' - '.CONNECTED.' Connection established with the database "'.$this->_db_name.'"';
+                $this->_object_log[] = date('Y-m-d H:i:s').' - '.SUCC_QUERY_DONE.' Connection established with the database "'.$this->_db_name.'"';
 
                 return $table;
             } catch(Exception $e){
                 if($deathEnabled){
                     die('Error, unsuccessful request"<br>Error description : '. $e->getMessage());
                 } else {
-                    $this->_object_log[] = date('Y-m-d H:i:s').' - '.$e->getMessage();
+                    $this->_object_log[] = date('Y-m-d H:i:s').' - '.ERR_QUERY_FAILED.' '.$e->getMessage();
                     return false;
                 }
             }
