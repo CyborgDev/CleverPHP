@@ -1,4 +1,9 @@
 <?php
+    /**
+     * ==============================
+     *      Configuration file
+     * ==============================
+     */
     $_DATABASE_HOST = 'localhost';
     $_DATABASE_NAME = 'db_name';
     $_DATABASE_CHARSET = 'utf8';
