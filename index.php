@@ -1,21 +1,8 @@
 <?php
-    //On démarre la session
-    session_start();
-
+    define('PATH_TO_ROOT', './');
     spl_autoload_register(function ($class_name) {
         include_once 'Models/' . $class_name . '.php';
     });
-
-    include_once 'conf/Config.php';
-    include_once 'conf/DatabaseConnection.php';
-
-    //Attribution des variables de session
-    $id=(isset($_SESSION['id']))?(int) $_SESSION['id']:-1;
-    $qualification=(isset($_SESSION['qualification']))?$_SESSION['qualification']:''; //Agent ou Collaborateur
-    $profile = (isset($_SESSION['profile']))?(int)$_SESSION['profile']:0; //1 ou 2 pour Agent et 3, 4, 5, 6, 7, 8, 9 ou 10 pour Collaborateur
-    $login = (isset($_SESSION['login']))?$_SESSION['login']:''; // login du compte de l'utilisateur
-    $name = (isset($_SESSION['name']))?$_SESSION['name']:''; // name de l'utilisateur
-    $firstname = (isset($_SESSION['firstname']))?$_SESSION['firstname']:''; // firstname de l'utilisateur
 
     $message = array(); // Variable utilisee pour les messages d'alerte (succes ou echec)
 
@@ -42,7 +29,4 @@
             include_once 'controller/user/DashboardController.php';
         }
     }
-
-    //On inclut le pied de page
-    include_once 'view/components/foot.php';
 ?>
